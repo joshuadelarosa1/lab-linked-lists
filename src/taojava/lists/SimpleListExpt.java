@@ -10,6 +10,9 @@ import java.util.ListIterator;
  */
 public class SimpleListExpt
 {
+  // +-----------+--------------------------------------------------------
+  // | Utilities |
+  // +-----------+
 
   /**
    * Add an element using an iterator.
@@ -22,15 +25,42 @@ public class SimpleListExpt
   } // add(PrintWriter)
 
   /**
+   * Add a bunch of elements to a list at the position given by a 
+   * list iterator.
+   */
+  static void add(PrintWriter pen, ListIterator<String> lit, String[] vals)
+    throws Exception
+  {
+    for (String val : vals)
+      add(pen, lit, val);
+  } // add(PrintWriter, SimpleList<String>, String[])
+
+  /**
+   * Add a bunch of elements to the front of a list.
+   */
+  static void add(PrintWriter pen, SimpleList<String> lst, String[] vals)
+    throws Exception
+  {
+    add(pen, lst.listIterator(), vals);
+  } // add(PrintWriter, SimpleList<String>, String[])
+
+  /**
+   * Add a bunch of elements to the end of a list.
+   */
+  static void addToEnd(PrintWriter pen, SimpleList<String> lst, String[] vals)
+    throws Exception
+  {
+    add(pen, toEnd(lst.listIterator()), vals);
+  } // addToEnd(PrintWriter, SimpleList<String>, vals)
+
+  /**
    * Print a list from back to front.  Intended primarily as an
    * exercise in moving backwards through the list.
    */
   static void printBackwards(PrintWriter pen, SimpleList<String> lst)
   {
-    ListIterator lit = lst.listIterator();
-    // Move to the end of the list
-    while (lit.hasNext())
-      lit.next();
+    ListIterator<String> lit = lst.listIterator();
+    toEnd(lit);
     // Print the elements from back to front
     while (lit.hasPrevious())
       {
@@ -51,6 +81,20 @@ public class SimpleListExpt
         pen.println(i++ + ": " + val);
       } // for
   } // printList(PrintWriter, SimpleList<String>)
+
+  /**
+   * Move an iterator to the end of the list.
+   */
+  static ListIterator<String> toEnd(ListIterator<String> lit)
+  {
+    while (lit.hasNext())
+      lit.next();
+    return lit;
+  } // toEnd(ListIterator<String>
+
+  // +-----------+--------------------------------------------------------
+  // | Utilities |
+  // +-----------+
 
   /**
    * Add a variety of elements.
@@ -114,4 +158,37 @@ public class SimpleListExpt
     pen.println("Printing backwards.");
     printBackwards(pen, lst);
   } // prevExpt(PrintWriter, SimpleList<String>)
+
+  /**
+   * An experiment that exercises the set method, moving from back
+   * to front.
+   */
+  static void setBackwardExpt(PrintWriter pen, SimpleList<String> lst)
+  {
+    ListIterator<String> lit = lst.listIterator();
+    toEnd(lit);
+    pen.println("lowercasing");
+    while (lit.hasPrevious())
+      {
+        String str = lit.previous();
+        lit.set(str.toLowerCase());
+      } // while
+    printList(pen, lst);
+  } // setBackwardsExpt(PrintWriter, SimpleList<String>)
+
+  /**
+   * An experiment the exercises the set method, moving from front
+   * to back.
+   */
+  static void setForwardExpt(PrintWriter pen, SimpleList<String> lst)
+  {
+    ListIterator<String> lit = lst.listIterator();
+    pen.println("UPPERCASING");
+    while (lit.hasNext())
+      {
+        String str = lit.next();
+        lit.set(str.toUpperCase());
+      } // while
+    printList(pen, lst);
+  } // setForwardExpt
 } // class SimpleListExpt
