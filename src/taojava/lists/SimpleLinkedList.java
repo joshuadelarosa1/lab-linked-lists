@@ -23,20 +23,19 @@ import java.util.NoSuchElementException;
  * to be significantly more expensive, potentially O(n).
  */
 public class SimpleLinkedList<T>
-    implements
-      SimpleList<T>
+    implements SimpleList<T>
 {
   // +-------+-------------------------------------------------------------
   // | Notes |
   // +-------+
 
-/*
-  We keep a dummy node at the beginning of the list so that it's easier
-  to do a number of the operations.
+  /*
+    We keep a dummy node at the beginning of the list so that it's easier
+    to do a number of the operations.
 
-  Iterators are always on the node immediately prior to the node we're
-  adding.
- */
+    Iterators are always on the node immediately prior to the node we're
+    adding.
+   */
 
   // +--------+------------------------------------------------------------
   // | Fields |
@@ -49,7 +48,7 @@ public class SimpleLinkedList<T>
 
   /**
    * The number of modifications to the list.  Used to determine
-   * whether a cursor is valid.
+   * whether an iterator is valid.
    */
   long mods;
 
@@ -90,9 +89,9 @@ public class SimpleLinkedList<T>
         Node cursor = SimpleLinkedList.this.front;
 
         /**
-         * The position in the list (because the folks an Sun/Oracle
-         * decided that list iterators need to be able to return
-         * integer indices.
+         * The position in the list. (Included because the folks 
+         * at Sun/Oracle decided that list iterators need to be 
+         * able to return integer indices.)
          */
         int pos;
 

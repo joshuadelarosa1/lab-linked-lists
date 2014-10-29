@@ -7,8 +7,7 @@ import java.util.ListIterator;
  * Very simple lists.
  */
 public interface SimpleList<T>
-    extends
-      Iterable<T>
+    extends Iterable<T>
 {
   public Iterator<T> iterator();
 
